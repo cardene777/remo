@@ -1,6 +1,17 @@
+import pandas as pd
 import streamlit as st
 import datetime
 import csv
+
+
+def data_check():
+    with open('./data.csv', "r") as file:
+        reader = csv.reader(file)
+        datas = [data for data in reader]
+
+    datas = pd.DataFrame(datas)
+    datas = datas.rename({"0": "id", "1": "問題文", "2": "答え", "3": "復習日", "4": "復習回数"})
+    st.table(datas)
 
 
 def register_data():
@@ -73,17 +84,12 @@ def question_answer():
             question_answer()
 
 
-
-
-
-
-
-
 def main():
     apps = {
         '-': None,
         "問題を登録": register_data,
-        "復習する": question_answer
+        "復習する": question_answer,
+        "データチェック": data_check
     }
 
     selected_app_name = st.sidebar.selectbox(label='選択してください。',
