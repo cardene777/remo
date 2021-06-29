@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import datetime
 import csv
+import os
 
 
 def data_check():
@@ -85,6 +86,7 @@ def question_answer():
 
 
 def main():
+    os.chmod('data.csv', 0o700)
     apps = {
         '-': None,
         "問題を登録": register_data,
