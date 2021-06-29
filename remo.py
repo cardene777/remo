@@ -86,7 +86,10 @@ def question_answer():
 
 
 def main():
-    os.chmod('data.csv', 0o700)
+    # st.write(os.access('./data.csv', os.R_OK))
+    # st.write(os.access('./data.csv', os.W_OK))
+    # st.write(os.access('./data.csv', os.X_OK))
+    os.chmod('./data.csv', 0o777)
     apps = {
         '-': None,
         "問題を登録": register_data,
