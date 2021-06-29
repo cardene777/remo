@@ -1,7 +1,6 @@
 import streamlit as st
 import datetime
 import csv
-import pandas as pd
 
 
 def register_data():
