@@ -1,0 +1,55 @@
+#:import utils kivy.utils
+
+<HomeScreen>:
+    FloatLayout:
+        canvas:
+            Color:
+                rgb:
+                    utils.get_color_from_hex("#39B3F2")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        Label:
+            # Streak Label
+            pos_hint: {"top": 1, "left": 1}
+            size_hint: 1, .1
+            text: "12 Day Streek"
+            id: streak_label
+
+        ScrollView:
+            pos_hint: {"top": .9, "left": 1}
+            size_hint: 1, .75
+
+            GridLayout:
+                # Banner grid
+                id: banner_grid
+                cols: 1
+                spacing: 10, 10
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: "100dp"
+                row_force_default: True
+
+
+        GridLayout:
+            # Add 3 menu btns here
+            rows: 1
+            pos_hint: {"top": .15, "left": 1}
+            size_hint: 1, .15
+            ImageButton:
+                source: "icons/add.png"
+                on_release:
+                    print("RELEASE ADD FRIEND BUTTON")
+            ImageButton:
+                source: "icons/friends_list.png"
+                on_release:
+                    print("RELEASE FOOTBALL BUTTON")
+            ImageButton:
+                source: "icons/settings.png"
+                on_release:
+                    app.change_screen("settings_screen")
+
+
+
+
