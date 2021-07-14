@@ -23,8 +23,7 @@
 
         Label:
             id: login_message
-            text: "invalid email"
-            color: (1, 0, 0)
+            color: (1, 0, 0, 1)
             size_hint: .8, .1
             pos_hint: {"top": .4, "right": .9}
 
@@ -41,5 +40,5 @@
             size_hint: .8, .1
             pos_hint: {"top": .2, "right": .9}
             on_release:
-                app.my_firebase.sign_up(login_email.text, login_pass.text
+                app.my_firebase.sign_up(login_email.text, login_password.text)
 

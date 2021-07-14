@@ -1,2 +1,4 @@
-streamlit
-pandas
+streamlit~=0.83.0
+pandas~=1.2.4
+kivy~=2.0.0
+requests~=2.25.1
