@@ -39,6 +39,11 @@ class MyFirebase:
                 f"https://tutorial-78ce1-default-rtdb.firebaseio.com/next_friend_id.json?auth={idToken}"
             )
             my_friend_id = friend_get_req.json()
+            friend_patch_data = f'{"next_friend_id": {str(my_friend_id+1)}}'
+            friend_patch_req = requests.patch(
+                f"https://tutorial-78ce1-default-rtdb.firebaseio.com/.json?auth={idToken}",
+                data=friend_patch_data
+            )
 
             print(friend_get_req.json())
             # Default streak

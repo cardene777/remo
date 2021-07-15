@@ -19,6 +19,14 @@ class HomeScreen(Screen):
     pass
 
 
+class AddFriendScreen(Screen):
+    pass
+
+
+class AddWorkoutScreen(Screen):
+    pass
+
+
 class LabelButton(ButtonBehavior, Label):
     pass
 
@@ -60,6 +68,14 @@ class Tutorial(App):
                 img = ImageButton(source=f"icons/avatars/{f}", on_release=partial(self.change_avatar, f))
                 avatar_grid.add_widget(img)
 
+        # Populate workout image grid
+        workout_image_grid = self.root.ids["add_workout_screen"].ids["workout_image_grid"]
+        for root_dir, folders, files in walk("icons/workouts"):
+            for f in files:
+                if ".png" in f:
+                    img = ImageButton(source=f"icons/workouts/{f}")
+                    workout_image_grid.add_widget(img)
+
         try:
             # Try to read the persistem signin credentials (refresh token)
             with open("refresh_token.txt", "r") as f:
@@ -67,6 +83,8 @@ class Tutorial(App):
 
             # Use refresh token to get a new idToken
             id_token, local_id = self.my_firebase.exchange_refresh_token(refresh_token)
+            self.lcoal_id = local_id
+            self.id_token = id_token
 
             # Get database data
             result = requests.get(f"https://tutorial-78ce1-default-rtdb.firebaseio.com/{local_id}.json?auth={id_token}")
@@ -78,6 +96,9 @@ class Tutorial(App):
             # Get and updates avatar image
             avatar_image = self.root.ids["avatar_image"]
             avatar_image.source = "icons/avatars/" + data["avatar"]
+
+            # Get friend list
+            self.friends_list = data["friends"]
 
             # Get and updates streak label
             streak_label = self.root.ids["home_screen"].ids["streak_label"]
@@ -105,6 +126,38 @@ class Tutorial(App):
 
         except Exception as e:
             print(e)
+
+
+    def add_friend(self, friend_id):
+        # Query database and make sure friend_id exists
+        check_req = requests.get(
+            f'https://tutorial-78ce1-default-rtdb.firebaseio.com/.json?orderBy="my_friend_id"&equalTo={friend_id}'
+        )
+        # print("------------------------")
+        # print(check_req.ok)
+        # print(check_req.json())
+        # print("------------------------")
+        data = check_req.json()
+        if data == {}:
+            # if it doesn't display it doesn't in the message on the add friend screen
+            self.root.ids["add_friend_screen"].ids["add_friend_label"].text = "Invalid friend ID"
+        else:
+            key = data.keys()[0]
+            new_friend_id = data[key]["my_friend_id"]
+            self.root.ids["add_friend_screen"].ids["add_friend_label"].text = f"Friend ID {friend_id} added successfullu"
+            # Add friend id to friends list and new friend list
+            self.friends_list += f", {friend_id}"
+            patch_data = f'{"friends": "{self.friends_list}"}'
+            patch_req = requests.patch(
+                f"https://tutorial-78ce1-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}",
+                data=patch_data)
+
+            print(patch_req.ok)
+            print(patch_req.json())
+
+
+        # if it does, "success" and to friend list
+
 
     def change_avatar(self, image, widget_id):
         # Change avatar in the app
