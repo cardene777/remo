@@ -51,14 +51,18 @@ GUI = Builder.load_file("tutorial.kv")
 
 
 class Tutorial(App):
-    my_friend_id = 1
-
     def __init__(self, **kwargs):
         super().__init__()
         self.my_firebase = MyFirebase()
+        self.my_friend_id = 1
+        self.workout_image = None
+        self.option_choice = None
 
     def build(self):
         return GUI
+
+    def update_workout_image(self, filename, widget_id):
+        self.workout_image = filename
 
     def on_start(self):
         # Populate avatar grid
@@ -73,7 +77,7 @@ class Tutorial(App):
         for root_dir, folders, files in walk("icons/workouts"):
             for f in files:
                 if ".png" in f:
-                    img = ImageButton(source=f"icons/workouts/{f}")
+                    img = ImageButton(source=f"icons/workouts/{f}", on_release=partial(self.update_workout_image, f))
                     workout_image_grid.add_widget(img)
 
         try:
@@ -114,7 +118,8 @@ class Tutorial(App):
                 for _ in range(5):
                     # Populate workout grid in home screen
                     W = WorkoutBanner(workout_image=workout["workout_image"], description=workout["description"],
-                                      type_image=workout["type_image"], number=workout["number"], units=workout["units"],
+                                      type_image=workout["type_image"], number=workout["number"],
+                                      units=workout["units"],
                                       likes=workout["likes"])
                     # print(workout["workout_image"])
                     # print(workout["units"])
@@ -126,7 +131,6 @@ class Tutorial(App):
 
         except Exception as e:
             print(e)
-
 
     def add_friend(self, friend_id):
         # Query database and make sure friend_id exists
@@ -144,7 +148,8 @@ class Tutorial(App):
         else:
             key = data.keys()[0]
             new_friend_id = data[key]["my_friend_id"]
-            self.root.ids["add_friend_screen"].ids["add_friend_label"].text = f"Friend ID {friend_id} added successfullu"
+            self.root.ids["add_friend_screen"].ids[
+                "add_friend_label"].text = f"Friend ID {friend_id} added successfullu"
             # Add friend id to friends list and new friend list
             self.friends_list += f", {friend_id}"
             patch_data = f'{"friends": "{self.friends_list}"}'
@@ -155,9 +160,7 @@ class Tutorial(App):
             print(patch_req.ok)
             print(patch_req.json())
 
-
         # if it does, "success" and to friend list
-
 
     def change_avatar(self, image, widget_id):
         # Change avatar in the app
@@ -171,6 +174,60 @@ class Tutorial(App):
                        data=my_data)
 
         self.change_screen("settings_screen")
+
+    def add_workout(self):
+        # Get data from all fields in add workout screen
+        workout_ids = self.root.ids["add_workout_screen"].ids
+        # Already have workou image in self.workout_image variable
+        description_input = workout_ids["description_input"].text
+        # Already have option choice in self.option_choice
+        quantity_input = workout_ids["quantity_input"].text
+        units_input = workout_ids["units_input"].text
+        month_input = workout_ids["month_input"].text
+        day_input = workout_ids["day_input"].text
+        year_input = workout_ids["year_input"].text
+
+        # Make sure fields aren't garbage
+        if self.workout_image is None:
+            print("come back to this")
+
+        # They are allawed to leave to description
+        if self.option_choice is None:
+            workout_ids["time_label"].color = (1, 0, 0, 1)
+            workout_ids["distance_label"].color = (1, 0, 0, 1)
+            workout_ids["sets_label"].color = (1, 0, 0, 1)
+            return
+
+        try:
+            int_quantity = float(quantity_input)
+        except:
+            workout_ids["quantity_input"].color = (1, 0, 0, 1)
+            return
+
+        if units_input == "":
+            workout_ids["units_input"].background_color = (1, 0, 0, 1)
+            return
+
+        try:
+            int_month = int(month_input)
+        except:
+            workout_ids["month_input"].background_color = (1, 0, 0, 1)
+            return
+
+        try:
+            int_day = int(day_input)
+        except:
+            workout_ids["day_input"].background_color = (1, 0, 0, 1)
+            return
+
+        try:
+            int_year = int(year_input)
+        except:
+            workout_ids["year_input"].background_color = (1, 0, 0, 1)
+            return
+
+
+        # If all data is ok, send the data to firebase real-time database
 
     def change_screen(self, screen_name):
         print(self.root.ids)
