@@ -8,7 +8,7 @@
 
     FloatLayout:
         Label:
-            "Select workout Image"
+            text: "Select workout Image"
             size_hint: 1, .05
             pos_hint: {"top": 1, "right": 1}
 
@@ -16,6 +16,12 @@
             size_hint: 1, .15
             pos_hint: {"top": .95, "right": 1}
             GridLayout:
+                canvas:
+                    Color:
+                        rgb:
+                            utils.get_color_from_hex("#39B3F2")
+                    Rectangle:
+                        size: self.size
                 rows: 1
                 width: self.minimum_width
                 col_default_width: "100dp"
@@ -78,38 +84,72 @@
             pos_hint: {"top": .35, "right": .425}
             hint_text: "Quantity"
             id: quantity_input
+            on_text:
+                self.background_color = (1, 1, 1, 1)
 
         TextInput:
             size_hint: .3, .1
             pos_hint: {"top": .35, "right": .875}
             hint_text: "Units"
             id: units_input
+            on_text:
+                self.background_color = (1, 1, 1, 1)
 
         TextInput:
             size_hint: .2, .1
             pos_hint: {"top": .2, "right": .3}
             hint_text: "MM"
             id: month_input
+            on_text:
+                self.background_color = (1, 1, 1, 1)
 
         TextInput:
             size_hint: .2, .1
             pos_hint: {"top": .2, "right": .6}
             hint_text: "DD"
             id: day_input
+            on_text:
+                self.background_color = (1, 1, 1, 1)
 
         TextInput:
             size_hint: .2, .1
             pos_hint: {"top": .2, "right": .9}
             hint_text: "YY"
             id: year_input
+            on_text:
+                self.background_color = (1, 1, 1, 1)
 
         LabelButton:
             text: "[u]Add Workout[/u]"
+            canvas.before:
+                Color:
+                    rgb:
+                        utils.get_color_from_hex("#39B3F2") if self.state == "normal" else utils.get_color_from_hex("#66DDFF")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
             size_hint: .5, .1
             pos_hint: {"top": .1, "right": 1}
             markup: True
             on_release:
                 app.add_workout()
 
-        
+        LabelButton:
+            text: "[u]Back[/u]"
+            canvas.before:
+                Color:
+                    rgb:
+                        utils.get_color_from_hex("#39B3F2") if self.state == "normal" else utils.get_color_from_hex("#66DDFF")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            size_hint: .5, .1
+            pos_hint: {"top": .1, "right": .5}
+            markup: True
+            on_release:
+                app.change_screen("home_screen")
+
+
+
+
 
