@@ -1,7 +1,25 @@
+#: import get_color_from_hex kivy.utils.get_color_from_hex
+#:include kivy/home_screen.kv
+#:include kivy/search_screen.kv
+#:include kivy/note_screen.kv
+#:include kivy/settings_screen.kv
 
-GridLayout:
-    TextInput:
-        text: "入力してください。"
-        focus: True
-        pos_hint: {"top": 1, "left": 1}
-        size_hint: 1, .1
+FloatLayout:
+    ScreenManager:
+        id: screen_manager
+        HomeScreen:
+            name: "home_screen"
+            id: home_screen
+
+        SearchScreen:
+            name: "search_screen"
+            id: search_screen
+
+        NoteScreen:
+            name: "note_screen"
+            id: note_screen
+
+        SettingsScreen:
+            name: "settings_screen"
+            id: settings_screen
+
