@@ -226,7 +226,6 @@ class Tutorial(App):
             workout_ids["year_input"].background_color = (1, 0, 0, 1)
             return
 
-
         # If all data is ok, send the data to firebase real-time database
 
     def change_screen(self, screen_name):
