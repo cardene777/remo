@@ -1,4 +1,5 @@
 <SearchScreen>
+    search_word: search_word
     BoxLayout:
         canvas:
             Color:
@@ -26,17 +27,33 @@
         GridLayout:
             canvas:
                 Color:
-                    rgb: get_color_from_hex("#28505D")
+                    rgb: get_color_from_hex("#669999")
                 Rectangle:
                     size: self.size
                     pos: self.pos
-            cols: 1
-            padding: [200, 120]
+            cols: 4
+            padding: [50, 50]
+            spacing: 30
+
             TextInput:
+                id: search_word
                 hint_text: "キーワード"
                 font_size: "25sp"
                 multiline: False
                 padding: [30]
+                text: ""
+
+            Button:
+                text: "検索"
+                on_release: root.text_display()
+
+            Button:
+                text: "データ追加"
+                on_release: app.add_data(search_word.text)
+
+            Button:
+                text: "データ取得"
+                on_release: app.get_data()
 
 
         GridLayout:
