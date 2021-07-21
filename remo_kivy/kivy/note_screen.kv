@@ -31,9 +31,11 @@
                     size: self.size
                     pos: self.pos
             cols: 1
-            padding: [200, 120]
-            Label:
-                text: "1"
+            padding: [0, 30]
+            ImageButton:
+                source: "images/review.png"
+                on_release:
+                    app.get_data()
 
         GridLayout:
             canvas:
