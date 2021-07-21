@@ -37,17 +37,23 @@ class SettingsScreen(Screen):
     pass
 
 
-GUI = Builder.load_file("remo.kv")
+# GUI = Builder.load_file("remo.kv")
 
 
-class Remo(App):
+# class MainApp(MDApp):
+#     pass
+
+
+class MainApp(MDApp):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.firebase_url = "https://remo-app-7-default-rtdb.firebaseio.com/.json"
+        self.user_idToken = ""
+        self.local_id = ""
 
     def build(self):
-        return GUI
+        self.root = Builder.load_file("remo.kv")
 
     def on_start(self):
         pass
@@ -55,6 +61,13 @@ class Remo(App):
     def change_screen(self, screen_name):
         screen_manager = self.root.ids["screen_manager"]
         screen_manager.current = screen_name
+
+    def display_user_tokens(self):
+        self.root.ids.the_label.text = "local_id: " + self.local_id + "\n user_idToken: " + self.user_idToken
+
+    def sign_out(self):
+        self.root.ids.firebase_login_screen.log_out()
+        self.change_screen('firebase_login_screen')
 
     def add_data(self, text):
         json_data: str = '{"name": "cardene", "text": "%s", "review": 0}' % text
@@ -69,4 +82,6 @@ class Remo(App):
 
 
 if __name__ == '__main__':
-    Remo().run()
+    # MainApp().run()
+    MainApp().run()
+

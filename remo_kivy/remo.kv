@@ -1,12 +1,26 @@
+#: import FirebaseLoginScreen firebaseloginscreen.firebaseloginscreen.FirebaseLoginScreen
 #: import get_color_from_hex kivy.utils.get_color_from_hex
 #:include kivy/home_screen.kv
 #:include kivy/search_screen.kv
 #:include kivy/note_screen.kv
 #:include kivy/settings_screen.kv
 
+
 FloatLayout:
     ScreenManager:
         id: screen_manager
+
+        FirebaseLoginScreen:
+            id: firebase_login_screen
+            name: "firebase_login_screen"
+            debug: True
+            remember_user: True
+            require_email_verification: True
+            web_api_key: "AIzaSyBCbo62VEr-d0Qq8oST4nGy94bm17f8mpA"
+            on_login_success:
+                app.user_localId = self.localId
+                app.user_idToken = self.idToken
+                screen_manager.current = "home_screen"
 
         HomeScreen:
             name: "home_screen"
@@ -23,4 +37,7 @@ FloatLayout:
         SettingsScreen:
             name: "settings_screen"
             id: settings_screen
+
+
+
 
