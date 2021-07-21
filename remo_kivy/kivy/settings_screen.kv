@@ -31,9 +31,12 @@
                     size: self.size
                     pos: self.pos
             cols: 1
-            padding: [200, 120]
-            Label:
-                text: "設定"
+            padding: [0, 30]
+
+            ImageButton:
+                source: "images/sign_out.png"
+                on_release:
+                    app.sign_out()
 
         GridLayout:
             canvas:
