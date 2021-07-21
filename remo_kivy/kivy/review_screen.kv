@@ -1,0 +1,79 @@
+<ReviewScreen>
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: get_color_from_hex("#FFFAFA")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        orientation: 'vertical'
+        spacing: 30
+        padding: [0, 30]
+
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#87CEEB")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            cols: 1
+            padding: [0, 30]
+            Image:
+                source: "images/review.png"
+
+        ScrollView:
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#669999")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                cols: 1
+                id: remo_data
+                size_hint_y: None
+                row_default_height: 150
+                height: self.minimum_height
+                Button:
+                    text: "1"
+                    on_release:
+                        app.get_data()
+                Button:
+                    text: "2"
+                Button:
+                    text: "3"
+                Button:
+                    text: "4"
+                Button:
+                    text: "5"
+                Button:
+                    text: "6"
+                Button:
+                    text: "7"
+                Button:
+                    text: "8"
+                Button:
+                    text: "9"
+                Button:
+                    text: "10"
+                Button:
+                    text: "11"
+                Button:
+                    text: "12"
+
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#BC8F8F")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            cols: 1
+            padding: [0, 30]
+            ImageButton:
+                source: "images/home04.png"
+                on_release:
+                    app.change_screen("home_screen")

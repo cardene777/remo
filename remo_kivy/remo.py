@@ -4,6 +4,7 @@ from kivy.lang import Builder
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
+from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 # from kivy.core.image import Image
 from kivy.uix.image import Image
@@ -37,11 +38,8 @@ class SettingsScreen(Screen):
     pass
 
 
-# GUI = Builder.load_file("remo.kv")
-
-
-# class MainApp(MDApp):
-#     pass
+class ReviewScreen(Screen):
+    pass
 
 
 class MainApp(MDApp):
@@ -50,7 +48,7 @@ class MainApp(MDApp):
         super().__init__(**kwargs)
         self.firebase_url = "https://remo-app-7-default-rtdb.firebaseio.com/.json"
         self.user_idToken = ""
-        self.local_id = ""
+        self.user_localId = ""
 
     def build(self):
         self.root = Builder.load_file("remo.kv")
@@ -62,26 +60,40 @@ class MainApp(MDApp):
         screen_manager = self.root.ids["screen_manager"]
         screen_manager.current = screen_name
 
-    def display_user_tokens(self):
-        self.root.ids.the_label.text = "local_id: " + self.local_id + "\n user_idToken: " + self.user_idToken
-
     def sign_out(self):
         self.root.ids.firebase_login_screen.log_out()
         self.change_screen('firebase_login_screen')
 
     def add_data(self, text):
-        json_data: str = '{"name": "cardene", "text": "%s", "review": 0}' % text
+        """
+        データ追加
+        :param text: add keyword
+        :return:
+        """
+        json_data: str = '{"name": "%s", "text": "%s", "review": 0}' % (self.user_localId, text)
         res = requests.post(url=self.firebase_url, json=json.loads(json_data))
         self.root.ids["search_screen"].ids["search_word"].text = ""
         self.change_screen("home_screen")
 
     def get_data(self):
+        """
+        データ取得
+        :return:
+        """
         res = requests.get(url=self.firebase_url)
-        self.root.ids["search_screen"].ids["search_word"].text = ""
-        print(res.json())
+        res_data = res.json()
+        remo_display = self.root.ids['review_screen'].ids['remo_data']
+        remo_datas: list = []
+        for r in res_data:
+            if res_data[r]["name"] == self.user_localId:
+                remo_datas.append(res_data[r])
+                data = Button(text=str(remo_datas))
+                remo_display.add_widget(data)
+
+        screen_manager = self.root.ids["screen_manager"]
+        screen_manager.current = "review_screen"
 
 
 if __name__ == '__main__':
-    # MainApp().run()
     MainApp().run()
 
