@@ -1,5 +1,6 @@
-<SearchScreen>
-    search_word: search_word
+<AddMemoScreen>
+    memo_title: memo_title
+    memo_text: memo_text
     BoxLayout:
         canvas:
             Color:
@@ -8,21 +9,8 @@
                 size: self.size
                 pos: self.pos
         orientation: 'vertical'
-        spacing: 30
-        padding: [0, 30]
+        spacing: 20
 
-
-        GridLayout:
-            canvas:
-                Color:
-                    rgb: get_color_from_hex("#FAEBD7")
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-            cols: 1
-            padding: [0, 30]
-            Image:
-                source: "images/search.png"
 
         GridLayout:
             canvas:
@@ -31,30 +19,44 @@
                 Rectangle:
                     size: self.size
                     pos: self.pos
-            cols: 4
-            padding: [50, 50]
-            spacing: 30
+            cols: 1
+            padding: [0, 30]
+            Image:
+                source: "images/note01.png"
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#FAEBD7")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            rows: 3
+            padding: [50, 30]
+            spacing: 20
 
             TextInput:
-                id: search_word
-                hint_text: "キーワード"
+                id: memo_title
+                hint_text: "タイトル"
                 font_size: "25sp"
                 multiline: False
-                padding: [30]
+                focus: True
                 text: ""
+                cursor_width: "2sp"
 
-            Button:
-                text: "検索"
-                on_release: root.text_display()
+            TextInput:
+                id: memo_text
+                hint_text: "メモ"
+                font_size: "25sp"
+                multiline: True
+                focus: True
+                text: ""
+                cursor_width: "2sp"
+                size_hint_y: 2
 
             Button:
                 text: "データ追加"
-                on_release: app.add_data(search_word.text)
-
-            Button:
-                text: "データ取得"
-                on_release: app.get_data()
-
+                on_release: app.add_data(memo_title.text, memo_text.text, datetime.date.today()) if memo_text.text != "" and memo_title.text != "" else app.change_screen("error_screen", "入力していない部分があります。")
 
         GridLayout:
             canvas:

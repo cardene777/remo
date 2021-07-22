@@ -1,4 +1,4 @@
-<NoteScreen>
+<MemoDetailScreen>
     BoxLayout:
         canvas:
             Color:
@@ -14,28 +14,49 @@
         GridLayout:
             canvas:
                 Color:
-                    rgb: get_color_from_hex("#87CEEB")
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-            cols: 1
-            padding: [0, 30]
-            Image:
-                source: "images/note01.png"
-
-        GridLayout:
-            canvas:
-                Color:
-                    rgb: get_color_from_hex("#669999")
+                    rgb: get_color_from_hex("#6699CC")
                 Rectangle:
                     size: self.size
                     pos: self.pos
             cols: 1
             padding: [0, 30]
             ImageButton:
-                source: "images/review.png"
+                source: "images/list01.png"
                 on_release:
                     app.get_data()
+
+        ScrollView:
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#669999")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                rows: 4
+                padding: [0, 30]
+
+                Label:
+                    id: title_label
+                    name: "title_label"
+                    text: ""
+
+                Label:
+                    id: text_label
+                    name: "text_label"
+                    text: ""
+
+                Label:
+                    id: review_label
+                    name: "review_label"
+                    text: ""
+
+                Label:
+                    id: review_day_label
+                    name: "review_day_label"
+                    text: ""
+
+
 
         GridLayout:
             canvas:
