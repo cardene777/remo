@@ -1,10 +1,14 @@
 #: import FirebaseLoginScreen firebaseloginscreen.firebaseloginscreen.FirebaseLoginScreen
 #: import get_color_from_hex kivy.utils.get_color_from_hex
+#: import datetime datetime
+
 #:include kivy/home_screen.kv
-#:include kivy/search_screen.kv
-#:include kivy/note_screen.kv
+#:include kivy/add_memo_screen.kv
+#:include kivy/memo_screen.kv
 #:include kivy/settings_screen.kv
-#:include kivy/review_screen.kv
+#:include kivy/memo_list_screen.kv
+#:include kivy/memo_detail_screen.kv
+#:include kivy/error_screen.kv
 
 
 FloatLayout:
@@ -27,22 +31,29 @@ FloatLayout:
             name: "home_screen"
             id: home_screen
 
-        SearchScreen:
-            name: "search_screen"
-            id: search_screen
+        AddMemoScreen:
+            name: "add_memo_screen"
+            id: add_memo_screen
 
-        NoteScreen:
-            name: "note_screen"
-            id: note_screen
+        MemoScreen:
+            name: "memo_screen"
+            id: memo_screen
 
         SettingsScreen:
             name: "settings_screen"
             id: settings_screen
 
-        ReviewScreen:
-            name: "review_screen"
-            id: review_screen
+        MemoListScreen:
+            name: "memo_list_screen"
+            id: memo_list_screen
 
+        MemoDetailScreen:
+            name: "memo_detail_screen"
+            id: memo_detail_screen
+
+        ErrorScreen:
+            name: "error_screen"
+            id: error_screen
 
 
 

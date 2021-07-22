@@ -1,4 +1,4 @@
-<ReviewScreen>
+<MemoScreen>
     BoxLayout:
         canvas:
             Color:
@@ -14,55 +14,50 @@
         GridLayout:
             canvas:
                 Color:
-                    rgb: get_color_from_hex("#87CEEB")
+                    rgb: get_color_from_hex("#6699CC")
                 Rectangle:
                     size: self.size
                     pos: self.pos
             cols: 1
             padding: [0, 30]
             Image:
-                source: "images/review.png"
+                source: "images/book01.png"
 
-        ScrollView:
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#FFFAFA")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            cols: 2
+            padding: [50, 0]
+            spacing: 20
+
+            ImageButton:
+                canvas.before:
+                    Color:
+                        rgb: get_color_from_hex("#669999")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                source: "images/list01.png"
+                on_release:
+                    app.get_data()
+
             GridLayout:
-                canvas:
+                canvas.before:
                     Color:
                         rgb: get_color_from_hex("#669999")
                     Rectangle:
                         size: self.size
                         pos: self.pos
                 cols: 1
-                id: remo_data
-                size_hint_y: None
-                row_default_height: 150
-                height: self.minimum_height
-                Button:
-                    text: "1"
+                padding: [0, 30]
+                ImageButton:
+                    source: "images/check01.png"
                     on_release:
-                        app.get_data()
-                Button:
-                    text: "2"
-                Button:
-                    text: "3"
-                Button:
-                    text: "4"
-                Button:
-                    text: "5"
-                Button:
-                    text: "6"
-                Button:
-                    text: "7"
-                Button:
-                    text: "8"
-                Button:
-                    text: "9"
-                Button:
-                    text: "10"
-                Button:
-                    text: "11"
-                Button:
-                    text: "12"
-
+                        print("a")
 
         GridLayout:
             canvas:
