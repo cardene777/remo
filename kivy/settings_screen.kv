@@ -1,0 +1,71 @@
+<SettingsScreen>
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: get_color_from_hex("#FFFAFA")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        orientation: 'vertical'
+        spacing: 30
+        padding: [0, 30]
+
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#28505D")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            cols: 1
+            padding: [0, 30]
+            Image:
+                source: "images/settings.png"
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#669999")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            rows: 2
+            padding: [0, 30]
+
+            GridLayout:
+                cols: 1
+                ImageButton:
+                    source: "images/sign_out.png"
+                    on_release:
+                        app.sign_out()
+
+            GridLayout:
+                cols: 1
+                size_hint_y: .3
+                font_size: "20sp"
+                Label:
+                    text: "サインアウト"
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#BC8F8F")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            rows: 2
+            padding: [0, 30]
+            GridLayout:
+                cols: 1
+                ImageButton:
+                    source: "images/home04.png"
+                    on_release:
+                        app.change_screen("home_screen")
+
+            GridLayout:
+                cols: 1
+                size_hint_y: .3
+                font_size: "20sp"
+                Label:
+                    text: "ホームに戻る"
