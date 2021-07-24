@@ -8,6 +8,9 @@
 #:include kivy/settings_screen.kv
 #:include kivy/memo_list_screen.kv
 #:include kivy/memo_detail_screen.kv
+#:include kivy/check_memo_screen.kv
+#:include kivy/memo_update_screen.kv
+#:include kivy/memo_delete_screen.kv
 #:include kivy/error_screen.kv
 
 
@@ -50,6 +53,18 @@ FloatLayout:
         MemoDetailScreen:
             name: "memo_detail_screen"
             id: memo_detail_screen
+
+        CheckMemoScreen:
+            name: "check_memo_screen"
+            id: check_memo_screen
+
+        MemoUpdateScreen:
+            name: "memo_update_screen"
+            id: memo_update_screen
+
+        MemoDeleteScreen:
+            name: "memo_delete_screen"
+            id: memo_delete_screen
 
         ErrorScreen:
             name: "error_screen"

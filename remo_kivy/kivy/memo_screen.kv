@@ -20,6 +20,7 @@
                     pos: self.pos
             cols: 1
             padding: [0, 30]
+            size_hint_y: .7
             Image:
                 source: "images/book01.png"
 
@@ -31,8 +32,8 @@
                     size: self.size
                     pos: self.pos
             cols: 2
-            padding: [50, 0]
-            spacing: 20
+            padding: [50, 20]
+            spacing: 50
 
             ImageButton:
                 canvas.before:
@@ -57,7 +58,7 @@
                 ImageButton:
                     source: "images/check01.png"
                     on_release:
-                        print("a")
+                        app.check_memo()
 
         GridLayout:
             canvas:
@@ -68,6 +69,7 @@
                     pos: self.pos
             cols: 1
             padding: [0, 30]
+            size_hint_y: .7
             ImageButton:
                 source: "images/home04.png"
                 on_release:
