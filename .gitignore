@@ -9,6 +9,7 @@ pycheck.lo
 
 /jupyter.log
 .ipynb_checkpoints/
+.cache/
 
 images/
 */png
