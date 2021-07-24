@@ -15,6 +15,8 @@ import kivy.utils
 
 import requests
 import json
+import datetime
+import random
 
 
 class ImageButton(ButtonBehavior, Image):
@@ -44,6 +46,18 @@ class MemoListScreen(Screen):
 
 
 class MemoDetailScreen(Screen):
+    pass
+
+
+class CheckMemoScreen(Screen):
+    pass
+
+
+class MemoUpdateScreen(Screen):
+    pass
+
+
+class MemoDeleteScreen(Screen):
     pass
 
 
@@ -119,11 +133,123 @@ class MainApp(MDApp):
             if res_data[r]["name"] == self.user_localId:
                 remo_datas.append(res_data[r])
                 title: str = str(res_data[r]["title"])
-                data = Button(text=f"{title}", font_size=50, on_release=review_detail)
+                data = Button(text=f"{title}", font_size=60, on_release=review_detail,
+                              background_normal='', background_color="#669999")
                 remo_display.add_widget(data)
 
-        screen_manager = self.root.ids["screen_manager"]
-        screen_manager.current = "memo_list_screen"
+        self.change_screen("memo_list_screen")
+
+    def check_memo(self):
+        res = requests.get(url=self.firebase_url)
+        res_data = res.json()
+        todays = datetime.date.today()
+        memos: list = []
+        for r in res_data:
+            memo_year, memo_month, memo_day = str(res_data[r]["review_day"]).split("-")
+            memo_review_day = datetime.date(int(memo_year), int(memo_month), int(memo_day))
+            if res_data[r]["name"] == self.user_localId and memo_review_day <= todays:
+                memos.append(res_data[r])
+        if not memos:
+            self.root.ids['check_memo_screen'].ids['title_label'].text = ""
+            self.root.ids['check_memo_screen'].ids['text_label'].text = ""
+            self.root.ids['check_memo_screen'].ids['review_label'].text = ""
+            self.root.ids['check_memo_screen'].ids['review_day_label'].text = ""
+            self.root.ids['check_memo_screen'].ids['finish_button'].text = ""
+            self.root.ids['check_memo_screen'].ids['finish_button'].disabled = True
+            self.root.ids['check_memo_screen'].ids['next_memo'].text = ""
+            self.root.ids['check_memo_screen'].ids['next_memo'].disabled = True
+            self.root.ids['check_memo_screen'].ids['error_label'].text = "復習するメモはありません。"
+
+            self.change_screen("check_memo_screen")
+
+        else:
+            memo = random.choice(memos)
+            self.root.ids['check_memo_screen'].ids['title_label'].text = memo["title"]
+            self.root.ids['check_memo_screen'].ids['text_label'].text = memo["text"]
+            self.root.ids['check_memo_screen'].ids['review_label'].text = str(memo["review"])
+            self.root.ids['check_memo_screen'].ids['review_day_label'].text = memo["review_day"]
+            self.root.ids['check_memo_screen'].ids['finish_button'].text = "完了"
+            self.root.ids['check_memo_screen'].ids['finish_button'].disabled = False
+            self.root.ids['check_memo_screen'].ids['next_memo'].text = "次のメモを復習する"
+            self.root.ids['check_memo_screen'].ids['next_memo'].disabled = False
+            self.root.ids['check_memo_screen'].ids['error_label'].text = ""
+
+            self.change_screen("check_memo_screen")
+
+    def check_finish(self, title, text, review, review_day):
+        review: int = int(review)
+        res = requests.get(url=self.firebase_url)
+        res_data = res.json()
+        today = datetime.date.today()
+        for r in res_data:
+            if res_data[r]["name"] == self.user_localId and res_data[r]["title"] == title:
+                if review == 0:
+                    new_review_day = str(today + datetime.timedelta(days=1))
+                    review += 1
+                elif review == 1:
+                    new_review_day = str(today + datetime.timedelta(days=3))
+                    review += 1
+                elif review == 2:
+                    new_review_day = str(today + datetime.timedelta(days=7))
+                    review += 1
+                elif review == 3:
+                    new_review_day = str(today + datetime.timedelta(days=25))
+                    review += 1
+                elif review == 4:
+                    new_review_day = str(today + datetime.timedelta(days=32))
+                    review += 1
+                elif review == 5:
+                    new_review_day = str(today + datetime.timedelta(days=50))
+                    review += 1
+                elif review == 6:
+                    new_review_day = str(today + datetime.timedelta(days=100))
+                    review += 1
+                elif review == 7:
+                    new_review_day = str(today + datetime.timedelta(days=150))
+                    review += 1
+                elif review == 8:
+                    new_review_day = str(today + datetime.timedelta(days=300))
+                    review += 1
+                else:
+                    new_review_day = str(today + datetime.timedelta(days=365))
+                    review += 1
+                json_data: str = '{"name": "%s", "title": "%s",  "text": "%s", "review": %s, "review_day": "%s"}' \
+                                 % (self.user_localId, title, text, review, new_review_day)
+                res = requests.patch(url=f"https://remo-app-7-default-rtdb.firebaseio.com/{r}/.json",
+                                     json=json.loads(json_data))
+
+                self.root.ids['check_memo_screen'].ids['title_label'].text = title
+                self.root.ids['check_memo_screen'].ids['text_label'].text = text
+                self.root.ids['check_memo_screen'].ids['review_label'].text = str(review)
+                self.root.ids['check_memo_screen'].ids['review_day_label'].text = new_review_day
+                self.root.ids['check_memo_screen'].ids['finish_button'].text = "完了"
+                self.root.ids['check_memo_screen'].ids['finish_button'].disabled = True
+                self.root.ids['check_memo_screen'].ids['next_memo'].text = "次のメモを復習する"
+                self.root.ids['check_memo_screen'].ids['next_memo'].disabled = False
+                self.root.ids['check_memo_screen'].ids['error_label'].text = ""
+
+                self.change_screen("check_memo_screen")
+
+    def memo_update_display(self, title, text, review, review_day):
+        self.root.ids['memo_update_screen'].ids['title_label'].text = title
+        self.root.ids['memo_update_screen'].ids['text_label'].text = text
+        self.root.ids['memo_update_screen'].ids['review_label'].text = str(review)
+        self.root.ids['memo_update_screen'].ids['review_day_label'].text = review_day
+
+        self.change_screen("memo_update_screen")
+
+    def memo_update(self, title, text, review, review_day):
+        res = requests.get(url=self.firebase_url)
+        res_data = res.json()
+        for r in res_data:
+            if res_data[r]["name"] == self.user_localId and res_data[r]["title"] == title:
+                json_data: str = '{"name": "%s", "title": "%s",  "text": "%s", "review": %s, "review_day": "%s"}' \
+                                 % (self.user_localId, title, text, review, review_day)
+                res = requests.patch(url=f"https://remo-app-7-default-rtdb.firebaseio.com/{r}/.json",
+                                     json=json.loads(json_data))
+
+    def memo_delete(self):
+        pass
 
 
 if __name__ == '__main__':
