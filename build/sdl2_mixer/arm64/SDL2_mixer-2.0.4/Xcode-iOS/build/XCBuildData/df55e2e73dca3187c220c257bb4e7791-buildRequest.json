@@ -1,0 +1,41 @@
+{
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "883cabcb439a4eb25d36bfceed366bf3a5f818e14a335abc39eeaed3c7a818e1"
+    }
+  ],
+  "continueBuildingAfterErrors" : false,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "configurationName" : "Release",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+          "ARCHS" : "arm64",
+          "HEADER_SEARCH_PATHS" : "$HEADER_SEARCH_PATHS /usr/include/machine /Users/akira/Desktop/local/develop/remo/dist/include/arm64/freetype /Users/akira/Desktop/local/develop/remo/dist/include/arm64/hostlibffi /Users/akira/Desktop/local/develop/remo/dist/include/arm64/ffi /Users/akira/Desktop/local/develop/remo/dist/include/arm64/openssl /Users/akira/Desktop/local/develop/remo/dist/include/common/sdl2 /Users/akira/Desktop/local/develop/remo/dist/include/common/sdl2_image /Users/akira/Desktop/local/develop/remo/dist/include/common/sdl2_mixer /Users/akira/Desktop/local/develop/remo/dist/include/common/sdl2_ttf ",
+          "IDEBuildOperationMaxNumberOfConcurrentCompileTasks" : "8",
+          "ONLY_ACTIVE_ARCH" : "NO",
+          "SDKROOT" : "iphoneos14.5"
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "build",
+          "COLOR_DIAGNOSTICS" : "YES",
+          "diagnostic_message_length" : "80",
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "shouldCollectMetrics" : false,
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : false,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : false
+}
