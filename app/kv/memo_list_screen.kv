@@ -1,0 +1,77 @@
+<MemoListScreen>
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: get_color_from_hex("#FFFAFA")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        orientation: 'vertical'
+        spacing: 30
+        padding: [0, 30]
+
+
+        GridLayout:
+            cols: 2
+            size_hint_y: .3
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#6699CC")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                rows: 2
+                padding: [0, 30]
+                size_hint_y: .7
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/list01.png"
+                        on_release:
+                            app.change_screen("memo_screen")
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .2
+                    font_size: "20sp"
+                    Label:
+                        text: "メモの復習・確認"
+
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#BC8F8F")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                rows: 2
+                padding: [0, 30]
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/home04.png"
+                        on_release:
+                            app.change_screen("home_screen")
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .2
+                    font_size: "20sp"
+                    Label:
+                        text: "ホームに戻る"
+
+        ScrollView:
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#A9A9A9")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                cols: 1
+                id: remo_data
+                size_hint_y: None
+                row_default_height: 120
+                height: self.minimum_height
+                spacing: 10

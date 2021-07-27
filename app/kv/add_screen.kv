@@ -1,0 +1,105 @@
+<AddScreen>
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: get_color_from_hex("#FFFAFA")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        orientation: 'vertical'
+        spacing: 20
+
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#669999")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            cols: 1
+            padding: [0, 30]
+            size_hint_y: .7
+            Image:
+                source: "images/note01.png"
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#FFFAFA")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            cols: 2
+            padding: [50, 20]
+            spacing: 50
+
+            GridLayout:
+                rows: 2
+                padding: [0, 30]
+                canvas.before:
+                    Color:
+                        rgb: get_color_from_hex("#669999")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .7
+                    ImageButton:
+                        source: "images/note01.png"
+                        on_release:
+                            app.change_screen("add_memo_screen")
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .3
+                    font_size: "20sp"
+                    Label:
+                        text: "メモ追加"
+
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgb: get_color_from_hex("#669999")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                rows: 2
+                padding: [0, 30]
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/question01.png"
+                        on_release:
+                            app.change_screen("add_question_screen")
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .3
+                    font_size: "20sp"
+                    Label:
+                        text: "問題追加"
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#BC8F8F")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            rows: 2
+            padding: [0, 30]
+            size_hint_y: .7
+            GridLayout:
+                cols: 1
+                ImageButton:
+                    source: "images/home04.png"
+                    on_release:
+                        app.change_screen("home_screen")
+
+            GridLayout:
+                cols: 1
+                size_hint_y: .3
+                font_size: "20sp"
+                Label:
+                    text: "ホームに戻る"

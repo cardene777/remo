@@ -1,0 +1,144 @@
+<MemoDeleteScreen>
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: get_color_from_hex("#FFFAFA")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        orientation: 'vertical'
+        spacing: 30
+        padding: [0, 30]
+
+        # ナビゲーションバー
+        GridLayout:
+            cols: 2
+            size_hint_y: .3
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#6699CC")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                cols: 1
+                padding: [0, 30]
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/list01.png"
+                        on_release:
+                            app.get_data()
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .2
+                    font_size: "20sp"
+                    Label:
+                        text: "メモ一覧に戻る"
+
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#BC8F8F")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                rows: 2
+                padding: [0, 30]
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/home04.png"
+                        on_release:
+                            app.change_screen("home_screen")
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .2
+                    font_size: "20sp"
+                    Label:
+                        text: "ホームに戻る"
+
+
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#669999")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            rows: 4
+            padding: [0, 30]
+
+            GridLayout:
+                rows: 2
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .1
+                    Label:
+                        id: path_id
+                        name: "path_id"
+                        color: 0, 0, 0, 0
+                        text: ""
+                GridLayout:
+                    cols: 1
+                    Label:
+                        id: memo_label
+                        name: "memo_label"
+                        text: ""
+                        font_size: 80
+
+            GridLayout:
+                canvas.after:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Line:
+                        rectangle: self.x, self.y, self.width, self.height
+                cols: 2
+                size_hint_y: .2
+                GridLayout:
+                    canvas.after:
+                        Color:
+                            rgba: 1, 1, 1, 1
+                        Line:
+                            rectangle: self.x, self.y, self.width, self.height
+                    rows: 2
+                    size_hint_y: .2
+                    Label:
+                        text: "復習回数"
+                        font_size: 30
+
+                    Label:
+                        id: review_label
+                        name: "review_label"
+                        text: ""
+                        font_size: 30
+
+                GridLayout:
+                    canvas.after:
+                        Color:
+                            rgba: 1, 1, 1, 1
+                        Line:
+                            rectangle: self.x, self.y, self.width, self.height
+                    rows: 2
+                    size_hint_y: .2
+                    Label:
+                        text: "次回の復習日"
+                        font_size: 30
+
+                    Label:
+                        id: review_day_label
+                        name: "review_day_label"
+                        text: ""
+                        font_size: 30
+
+        GridLayout:
+            cols: 1
+            size_hint_y: .1
+            padding: [100, 0]
+            Button:
+                text: "削除"
+                on_release:
+                    app.memo_delete(path_id.text)
+

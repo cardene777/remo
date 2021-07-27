@@ -1,0 +1,87 @@
+<AddMemoScreen>
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: get_color_from_hex("#FFFAFA")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        orientation: 'vertical'
+        spacing: 30
+        padding: [0, 30]
+
+
+        GridLayout:
+            cols: 2
+            size_hint_y: .3
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#6699CC")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                rows: 2
+                padding: [0, 30]
+                size_hint_y: .7
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/note01.png"
+                        on_release:
+                            app.change_screen("add_screen")
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .2
+                    font_size: "20sp"
+                    Label:
+                        text: "追加選択画面"
+
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: get_color_from_hex("#BC8F8F")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                rows: 2
+                padding: [0, 30]
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/home04.png"
+                        on_release:
+                            app.change_screen("home_screen")
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .2
+                    font_size: "20sp"
+                    Label:
+                        text: "ホームに戻る"
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: get_color_from_hex("#FAEBD7")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            rows: 2
+            padding: [50, 30]
+            spacing: 20
+
+            TextInput:
+                id: memo
+                hint_text: "メモ"
+                font_size: "25sp"
+                multiline: True
+                focus: True
+                text: ""
+                cursor_width: "2sp"
+                size_hint_y: 2
+
+            Button:
+                text: "データ追加"
+                on_release: app.add_data("memo", datetime.date.today(), memo.text)
