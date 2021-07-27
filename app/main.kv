@@ -5,15 +5,19 @@
 
 
 #:include kv/home_screen.kv
+#:include kv/add_screen.kv
 #:include kv/add_memo_screen.kv
+#:include kv/add_question_screen.kv
 #:include kv/memo_screen.kv
 #:include kv/settings_screen.kv
 #:include kv/memo_list_screen.kv
 #:include kv/memo_detail_screen.kv
+#:include kv/question_detail_screen.kv
 #:include kv/check_memo_screen.kv
 #:include kv/memo_update_screen.kv
 #:include kv/memo_delete_screen.kv
-#:include kv/error_screen.kv
+#:include kv/question_update_screen.kv
+#:include kv/question_delete_screen.kv
 
 
 FloatLayout:
@@ -24,9 +28,17 @@ FloatLayout:
             name: "home_screen"
             id: home_screen
 
+        AddScreen:
+            name: "add_screen"
+            id: add_screen
+
         AddMemoScreen:
             name: "add_memo_screen"
             id: add_memo_screen
+
+        AddQuestionScreen:
+            name: "add_question_screen"
+            id: add_question_screen
 
         MemoScreen:
             name: "memo_screen"
@@ -44,6 +56,10 @@ FloatLayout:
             name: "memo_detail_screen"
             id: memo_detail_screen
 
+        QuestionDetailScreen:
+            name: "question_detail_screen"
+            id: question_detail_screen
+
         CheckMemoScreen:
             name: "check_memo_screen"
             id: check_memo_screen
@@ -56,9 +72,12 @@ FloatLayout:
             name: "memo_delete_screen"
             id: memo_delete_screen
 
-        ErrorScreen:
-            name: "error_screen"
-            id: error_screen
+        QuestionUpdateScreen:
+            name: "question_update_screen"
+            id: question_update_screen
 
+        QuestionDeleteScreen:
+            name: "question_delete_screen"
+            id: question_delete_screen
 
 

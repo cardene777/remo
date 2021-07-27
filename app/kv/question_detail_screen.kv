@@ -1,4 +1,4 @@
-<MemoDetailScreen>
+<QuestionDetailScreen>
     BoxLayout:
         canvas:
             Color:
@@ -73,8 +73,6 @@
                         pos: self.pos
                 rows: 2
                 padding: [0, 30]
-
-
                 GridLayout:
                     cols: 1
                     ImageButton:
@@ -82,7 +80,7 @@
                         name: "update_button"
                         source: "images/pen01.png"
                         on_release:
-                            app.memo_update_display(path_id.text, memo_label.text, review_label.text, review_day_label.text)
+                            app.question_update_display(path_id.text, question_label.text, answer_label.text, review_label.text, review_day_label.text)
 
                 GridLayout:
                     cols: 1
@@ -106,7 +104,7 @@
                     ImageButton:
                         source: "images/delete01.png"
                         on_release:
-                            app.memo_delete_display(path_id.text, memo_label.text, review_label.text, review_day_label.text)
+                            app.question_delete_display(path_id.text, question_label.text, answer_label.text, review_label.text, review_day_label.text)
                 GridLayout:
                     cols: 1
                     size_hint_y: .3
@@ -127,7 +125,7 @@
                 padding: [0, 30]
 
                 GridLayout:
-                    rows: 2
+                    rows: 3
                     GridLayout:
                         cols: 1
                         size_hint_y: .1
@@ -136,17 +134,50 @@
                             name: "path_id"
                             color: 0, 0, 0, 0
                             text: ""
+
                     GridLayout:
                         cols: 1
+                        size_hint_y: .2
                         padding: [70, 0]
                         Label:
-                            id: memo_label
-                            name: "memo_label"
+                            id: question_label
+                            name: "question_label"
                             text_size: self.size
                             text: ""
                             font_size: 50
                             halign: 'center'
                             valign: 'middle'
+
+                    GridLayout:
+                        id: answer_grid
+                        rows: 2
+                        padding: [20]
+                        Label:
+                            id: answer_label
+                            name: "answer_label"
+                            color: 0, 0, 0, 0
+                            text_size: self.size
+                            size_hint_y: .3
+                            text: ""
+                            font_size: 50
+                            halign: 'center'
+                            valign: 'middle'
+
+                        GridLayout:
+                            cols: 1
+                            size_hint_y: .3
+                            padding: [20]
+                            Button:
+                                id: answer_button
+                                name: "answer_button"
+                                text_size: self.size
+                                text: "回答"
+                                font_size: 30
+                                halign: 'center'
+                                valign: 'middle'
+                                background_color: "gray"
+                                on_release:
+                                    app.answer_display(review_label.text, review_day_label.text, question_label.text, answer_label.text)
 
                 GridLayout:
                     canvas.after:

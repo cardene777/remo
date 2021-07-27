@@ -1,4 +1,4 @@
-<MemoUpdateScreen>
+<QuestionUpdateScreen>
     BoxLayout:
         canvas:
             Color:
@@ -54,7 +54,7 @@
             spacing: 20
 
             GridLayout:
-                rows: 2
+                rows: 3
                 spacing: 20
 
                 GridLayout:
@@ -69,8 +69,16 @@
                 GridLayout:
                     cols: 1
                     TextInput:
-                        id: memo_label
-                        name: "memo_label"
+                        id: question_label
+                        name: "question_label"
+                        text: ""
+                        font_size: 50
+
+                GridLayout:
+                    cols: 1
+                    TextInput:
+                        id: answer_label
+                        name: "answer_label"
                         text: ""
                         font_size: 50
 
@@ -124,7 +132,7 @@
             Button:
                 text: "編集"
                 on_release:
-                    app.memo_update(path_id.text, memo_label.text, review_label.text, review_day_label.text)
+                    app.question_update(path_id.text, question_label.text, answer_label.text, review_label.text, review_day_label.text)
 
 
 
