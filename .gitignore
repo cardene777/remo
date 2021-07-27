@@ -14,3 +14,7 @@ pycheck.lo
 images/
 */png
 models/
+
+remo-ios/
+dist/
+build/
