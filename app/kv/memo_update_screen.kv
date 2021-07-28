@@ -23,10 +23,19 @@
                         pos: self.pos
                 cols: 1
                 padding: [0, 30]
-                ImageButton:
-                    source: "images/list01.png"
-                    on_release:
-                        app.get_data()
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/list01.png"
+                        on_release:
+                            app.get_data()
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .2
+                    font_size: "20sp"
+                    Label:
+                        text: "メモ一覧に戻る"
 
             GridLayout:
                 canvas:
@@ -35,12 +44,20 @@
                     Rectangle:
                         size: self.size
                         pos: self.pos
-                cols: 1
+                rows: 2
                 padding: [0, 30]
-                ImageButton:
-                    source: "images/home04.png"
-                    on_release:
-                        app.change_screen("home_screen")
+                GridLayout:
+                    cols: 1
+                    ImageButton:
+                        source: "images/home04.png"
+                        on_release:
+                            app.change_screen("home_screen")
+                GridLayout:
+                    cols: 1
+                    size_hint_y: .2
+                    font_size: "20sp"
+                    Label:
+                        text: "ホームに戻る"
 
         GridLayout:
             canvas:
