@@ -31,12 +31,12 @@
                     size: self.size
                     pos: self.pos
             cols: 2
-            padding: [50, 20]
-            spacing: 50
+            padding: [20, 20]
+            spacing: 20
 
             GridLayout:
                 rows: 2
-                padding: [0, 30]
+
                 canvas.before:
                     Color:
                         rgb: get_color_from_hex("#669999")
@@ -46,6 +46,7 @@
                 GridLayout:
                     cols: 1
                     size_hint_y: .7
+                    padding: [30, 30]
                     ImageButton:
                         source: "images/note01.png"
                         on_release:
@@ -53,6 +54,7 @@
                 GridLayout:
                     cols: 1
                     size_hint_y: .3
+                    padding: [30, 30]
                     font_size: "20sp"
                     Label:
                         text: "メモ追加"
@@ -65,9 +67,10 @@
                         size: self.size
                         pos: self.pos
                 rows: 2
-                padding: [0, 30]
+
                 GridLayout:
                     cols: 1
+                    padding: [30, 30]
                     ImageButton:
                         source: "images/question01.png"
                         on_release:
@@ -75,6 +78,7 @@
 
                 GridLayout:
                     cols: 1
+                    padding: [30, 30]
                     size_hint_y: .3
                     font_size: "20sp"
                     Label:

@@ -80,8 +80,9 @@
                 focus: True
                 text: ""
                 cursor_width: "2sp"
-                size_hint_y: 2
+
 
             Button:
+                size_hint_y: .2
                 text: "データ追加"
                 on_release: app.add_data("memo", datetime.date.today(), memo.text)

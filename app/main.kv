@@ -14,6 +14,7 @@
 #:include kv/memo_detail_screen.kv
 #:include kv/question_detail_screen.kv
 #:include kv/check_memo_screen.kv
+#:include kv/check_question_screen.kv
 #:include kv/memo_update_screen.kv
 #:include kv/memo_delete_screen.kv
 #:include kv/question_update_screen.kv
@@ -63,6 +64,10 @@ FloatLayout:
         CheckMemoScreen:
             name: "check_memo_screen"
             id: check_memo_screen
+
+        CheckQuestionScreen:
+            name: "check_question_screen"
+            id: check_question_screen
 
         MemoUpdateScreen:
             name: "memo_update_screen"

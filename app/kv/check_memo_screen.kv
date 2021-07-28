@@ -78,18 +78,19 @@
                     rows: 2
                     GridLayout:
                         cols: 1
-                        size_hint_y: .2
+                        size_hint_y: .1
                         Label:
-                            id: title_label
-                            name: "title_label"
+                            id: path_id
+                            name: "path_id"
                             text: ""
-                            font_size: 80
+                            font_size: 1
+                            color: 0, 0, 0, 0
 
                     GridLayout:
                         cols: 1
                         Label:
-                            id: text_label
-                            name: "text_label"
+                            id: memo_label
+                            name: "memo_label"
                             text: ""
                             font_size: 50
 
@@ -100,15 +101,14 @@
                         Line:
                             rectangle: self.x, self.y, self.width, self.height
                     cols: 2
-                    size_hint_y: .2
+                    size_hint_y: .5
                     GridLayout:
-                        canvas.after:
+                        canvas.before:
                             Color:
                                 rgba: 1, 1, 1, 1
                             Line:
                                 rectangle: self.x, self.y, self.width, self.height
                         rows: 2
-                        size_hint_y: .2
                         Label:
                             text: "復習回数"
                             font_size: 30
@@ -120,13 +120,12 @@
                             font_size: 30
 
                     GridLayout:
-                        canvas.after:
+                        canvas.before:
                             Color:
                                 rgba: 1, 1, 1, 1
                             Line:
                                 rectangle: self.x, self.y, self.width, self.height
                         rows: 2
-                        size_hint_y: .2
                         Label:
                             text: "次回の復習日"
                             font_size: 30
@@ -153,7 +152,7 @@
                     name: "finish_button"
                     text: ""
                     on_release:
-                        app.check_finish(title_label.text, text_label.text, review_label.text, review_day_label.text)
+                        app.check_finish(path_id.text, review_label.text, review_day_label.text, memo=memo_label.text)
                 Button:
                     id: next_memo
                     name: "next_memo"
